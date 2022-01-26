@@ -3,9 +3,12 @@ spring:
   application:
     name: recipe-manger
   datasource:
-    username: brian27
-    password: love5430
-    url: jdbc:postgresql://localhost:5432/recipe-manger
+    username: wructzlmdftatu
+    password: 9610ae874ee56077f41e406220713d498d3224e7b75ead85448edeecc21a27af
+    url: jdbc:postgresql://ec2-50-16-241-192.compute-1.amazonaws.com:5432/df1evqiktr0ed
+#    username: brian27
+#    password: love5430
+#    url: jdbc:postgresql://localhost:5432/recipe-manger
   jpa:
     hibernate:
       ddl-auto: create
