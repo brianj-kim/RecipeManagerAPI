@@ -1,0 +1,23 @@
+
+spring:
+  application:
+    name: recipe-manger
+  datasource:
+    username: brian27
+    password: love5430
+    url: jdbc:postgresql://localhost:5432/recipe-manger
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        show-sql: true
+
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+          type: TRACE
