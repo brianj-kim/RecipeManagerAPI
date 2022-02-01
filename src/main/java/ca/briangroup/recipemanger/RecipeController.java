@@ -17,7 +17,7 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
-        return recipeRepository.findAll(Sort.by(Sort.Direction.DESC, "created_at"));
+        return recipeRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     @PostMapping("/recipes")
