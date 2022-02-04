@@ -1,6 +1,8 @@
 package ca.briangroup.recipemanger;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -11,19 +13,17 @@ import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(
-        value = {"createdAt", "updatedAt"},
-        allowGetters = true
-)
 public abstract class AuditModel implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
+    @JsonProperty("created-at")
     private Date createdAt;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "updated_at", nullable = false)
     @LastModifiedDate
+    @JsonProperty("updated-at")
     private Date updatedAt;
 
     public Date getCreatedAt() {

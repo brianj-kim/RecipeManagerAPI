@@ -19,7 +19,7 @@ public class IngredientController {
 
     @GetMapping("/recipes/{recipeId}/ingredients")
     public List<Ingredient> getAllIngredientByRecipeId(@PathVariable (value = "recipeId") Long recipeId) {
-        return ingredientRepository.findByRecipeId(recipeId);
+        return ingredientRepository.findByRecipeIdOrderByCreatedAtDesc(recipeId);
     }
 
     @PostMapping("/recipes/{recipeId}/ingredients")

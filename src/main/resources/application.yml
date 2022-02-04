@@ -3,13 +3,12 @@ spring:
   application:
     name: recipe-manger
   datasource:
-    username: <username>
-    password: <password>
-    url: <database-url>
-
+    username: brian27
+    password: love5430
+    url: jdbc:postgresql://localhost:5432/recipe-manger
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

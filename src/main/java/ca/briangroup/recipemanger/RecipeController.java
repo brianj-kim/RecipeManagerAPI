@@ -2,11 +2,13 @@ package ca.briangroup.recipemanger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -18,6 +20,17 @@ public class RecipeController {
     @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+    }
+
+    @GetMapping("recipes/{recipeId}")
+    public ResponseEntity<Recipe> getRecipe(@PathVariable Long recipeId) {
+        Optional<Recipe> recipeData = recipeRepository.findById(recipeId);
+
+        if(recipeData.isPresent()) {
+            return new ResponseEntity<>(recipeData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/recipes")
@@ -35,7 +48,7 @@ public class RecipeController {
         }).orElseThrow(() -> new ResourceNotFoundException("RecipeId " + recipeId + " not found"));
     }
 
-    @DeleteMapping("/recipe/{recipeId}")
+    @DeleteMapping("/recipes/{recipeId}")
     public ResponseEntity<?> deletePost(@PathVariable Long recipeId) {
         return recipeRepository.findById(recipeId).map(recipe -> {
             recipeRepository.delete(recipe);
