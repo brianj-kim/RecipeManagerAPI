@@ -38,7 +38,7 @@ public class Recipe extends AuditModel {
 
     @Size(max = 250)
     private String description;
-    
+
     private BigDecimal costTotal;
 
     private Integer ingredientCount;
