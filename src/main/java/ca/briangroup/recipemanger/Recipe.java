@@ -1,6 +1,5 @@
 package ca.briangroup.recipemanger;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Entity
 @Table
@@ -32,12 +32,18 @@ public class Recipe extends AuditModel {
     @Size(max = 100)
     private String name;
 
-    @Size(max = 250)
-    private String description;
-
     @NotNull
     @Size(max = 100)
     private String category;
+
+    @Size(max = 250)
+    private String description;
+    
+    private BigDecimal costTotal;
+
+    private Integer ingredientCount;
+
+    private BigDecimal revenue;
 
     @Override
     public String toString() {
@@ -46,6 +52,9 @@ public class Recipe extends AuditModel {
                 "name =" + name +
                 "category =" + category +
                 "description" + description +
+                "costTotal =" + costTotal +
+                "ingredientCount=" + ingredientCount +
+                "revenu=" + revenue +
                 "}";
     }
 

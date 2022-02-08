@@ -17,13 +17,13 @@ public abstract class AuditModel implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
-    @JsonProperty("created-at")
+    @JsonIgnore
     private Date createdAt;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "updated_at", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", nullable = false, updatable = true)
     @LastModifiedDate
-    @JsonProperty("updated-at")
+    @JsonIgnore
     private Date updatedAt;
 
     public Date getCreatedAt() {

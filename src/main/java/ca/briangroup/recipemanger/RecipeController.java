@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,11 +42,23 @@ public class RecipeController {
     @PutMapping("/recipes/{recipeId}")
     public Recipe updateRecipe(@PathVariable Long recipeId, @Valid @RequestBody Recipe recipeRequest) {
         return recipeRepository.findById(recipeId).map(recipe -> {
+            recipe.setIngredientCount(recipeRequest.getIngredientCount());
+            recipe.setCostTotal(recipeRequest.getCostTotal());
             recipe.setCategory(recipeRequest.getCategory());
             recipe.setDescription(recipeRequest.getDescription());
             recipe.setName(recipeRequest.getName());
             return recipeRepository.save(recipe);
         }).orElseThrow(() -> new ResourceNotFoundException("RecipeId " + recipeId + " not found"));
+    }
+
+    @PutMapping("/recipe/{recipeId}/costs/{costs}")
+    public void updateRecipeCostTotal(@PathVariable(value = "recipeId") Long recipeId, @PathVariable(value = "costs") BigDecimal costTotal) {
+        recipeRepository.updateCostTotal(recipeId, costTotal);
+    }
+
+    @PutMapping("/recipe/{recipeId}/counts/{counts}")
+    public void updateIngredientsCount(@PathVariable(value = "recipeId") Long recipeId, @PathVariable(value = "counts") Integer counts) {
+        recipeRepository.updateIngredientCount(recipeId, counts);
     }
 
     @DeleteMapping("/recipes/{recipeId}")
